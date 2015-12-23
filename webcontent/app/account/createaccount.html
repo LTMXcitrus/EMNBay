@@ -1,0 +1,37 @@
+<div ng-controller="createAccountCtrl">
+    <div class="container">
+        <div class="row">
+            <div input-field>
+                <input ng-model="user.username" type="text" length="150">
+                <label>Username</label>
+            </div>
+            <div input-field>
+                <input ng-model="user.password" type="password">
+                <label>Password</label>
+            </div>
+            <div input-field>
+                <input ng-model="user.password2" type="password">
+                <label>Repeat the password</label>
+            </div>
+            <div input-field>
+                <input ng-model="user.firstname" type="text" length="150">
+                <label>Firstname</label>
+            </div>
+            <div input-field>
+                <input ng-model="user.lastname" type="text" length="150">
+                <label>Lastname</label>
+            </div>
+            <div input-field>
+                <input ng-model="user.phone" type="number" length="150">
+                <label>Phone</label>
+            </div>
+            <div input-field>
+                <input ng-model="user.email" type="email" length="150">
+                <label>Email</label>
+            </div>
+            <div input-field>
+                <a class="btn-flat waves-effect waves-green" ng-click="createAccount(user)">Create my account</a>
+            </div>
+        </div>
+    </div>
+</div>
