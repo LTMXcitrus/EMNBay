@@ -34,7 +34,18 @@ app.use(router);
 app.use(express.static('./webcontent/app'));
 app.use('/uploads',express.static('uploads'));
 
+var connection_string = 'localhost/test';
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+    connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+        process.env.OPENSHIFT_APP_NAME;
+}
 //mongoose.connect('mongodb://localhost/test');
+//mongoose.connect('mongodb://admin:VKuD6ARlHTrQ@$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/emnbay');
+mongoose.connect('mongodb://'+connection_string);
+
 
 //var db = mongoose.connection;
 //db.on('error', console.error.bind(console, 'connection error:'));
