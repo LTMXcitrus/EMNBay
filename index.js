@@ -47,12 +47,11 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 mongoose.connect('mongodb://'+connection_string);
 
 
-//var db = mongoose.connection;
-//db.on('error', console.error.bind(console, 'connection error:'));
-//db.once('open', function () {
-//    //var server = https.Server(credentials,app).listen(8443);
-//    var server = http.Server(app).listen(server_port,server_ip_address);
-//    console.log('connected!');
-//});
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    //var server = https.Server(credentials,app).listen(8443);
+    var server = http.Server(app).listen(server_port,server_ip_address);
+    console.log('connected!');
+});
 
-var server = http.Server(app).listen(server_port,server_ip_address);
