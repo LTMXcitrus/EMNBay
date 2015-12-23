@@ -4050,7 +4050,7 @@ function($q ,  $timeout ,  $rootScope ,  $log ,  $transitionSuppressDeprecated) 
 angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindHtml'])
 
 /**
- * A helper service that can parse typeahead's syntax (string provided by items)
+ * A helper service that can parse typeahead's syntax (string provided by item)
  * Extracted to a separate service for ease of unit testing
  */
   .factory('typeaheadParser', ['$parse', function ($parse) {

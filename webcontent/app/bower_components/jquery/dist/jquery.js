@@ -441,7 +441,7 @@ jQuery.extend({
 			length = elems.length,
 			callbackExpect = !invert;
 
-		// Go through the array, only saving the items
+		// Go through the array, only saving the item
 		// that pass the validator function
 		for ( ; i < length; i++ ) {
 			callbackInverse = !callback( elems[ i ], i );
@@ -461,7 +461,7 @@ jQuery.extend({
 			isArray = isArraylike( elems ),
 			ret = [];
 
-		// Go through the array, translating each of the items to their new values
+		// Go through the array, translating each of the item to their new values
 		if ( isArray ) {
 			for ( ; i < length; i++ ) {
 				value = callback( elems[ i ], i, arg );
@@ -777,7 +777,7 @@ function Sizzle( selector, context, results, seed ) {
 					// Check parentNode to catch when Blackberry 4.6 returns
 					// nodes that are no longer in the document (jQuery #6963)
 					if ( elem && elem.parentNode ) {
-						// Handle the case where IE, Opera, and Webkit return items
+						// Handle the case where IE, Opera, and Webkit return item
 						// by name instead of ID
 						if ( elem.id === m ) {
 							results.push( elem );
@@ -3384,7 +3384,7 @@ jQuery.extend({
 	// Is the DOM ready to be used? Set to true once it occurs.
 	isReady: false,
 
-	// A counter to track how many items to wait for before
+	// A counter to track how many item to wait for before
 	// the ready event fires. See #6781
 	readyWait: 1,
 

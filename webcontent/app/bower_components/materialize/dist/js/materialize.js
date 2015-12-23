@@ -4263,7 +4263,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                         thingObject[ thing ] = value
                     }
 
-                    // Go through the things of items to set.
+                    // Go through the things of item to set.
                     for ( thingItem in thingObject ) {
 
                         // Grab the value of the thing.
@@ -5831,7 +5831,7 @@ DatePicker.prototype.deactivate = function( type, datesToDisable ) {
 
             var matchFound
 
-            // When we have disabled items, check for matches.
+            // When we have disabled item, check for matches.
             // If something is matched, immediately break out.
             for ( var index = 0; index < disabledItems.length; index += 1 ) {
                 if ( calendar.isDateExact( unitToDisable, disabledItems[index] ) ) {
@@ -5893,7 +5893,7 @@ DatePicker.prototype.activate = function( type, datesToEnable ) {
                 index,
                 isExactRange
 
-            // Go through the disabled items and try to find a match.
+            // Go through the disabled item and try to find a match.
             for ( index = 0; index < disabledItemsCount; index += 1 ) {
 
                 disabledUnit = disabledItems[index]

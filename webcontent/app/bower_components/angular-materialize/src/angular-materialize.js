@@ -705,7 +705,7 @@
                     });
                 };
 
-                // Add our items
+                // Add our item
                 addItem(alpha, disabled);
                 addItem(beta, disabled);
             }
@@ -808,7 +808,7 @@
                     '</ul>',
                 link: function (scope, element, attrs) {
 
-                    // Hook in our watched items
+                    // Hook in our watched item
                     scope.$watchCollection('[page, total, pageSize]', function () {
                         build(scope, attrs);
                     });

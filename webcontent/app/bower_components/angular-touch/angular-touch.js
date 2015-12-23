@@ -287,7 +287,7 @@ ngTouch.directive('ngClick', ['$parse', '$timeout', '$rootElement',
   //       other elements without ngTap on them work normally.
   //
   // This is an ugly, terrible hack!
-  // Yeah, tell me about it. The alternatives are using the slow click events, or making our items
+  // Yeah, tell me about it. The alternatives are using the slow click events, or making our item
   // deal with the ghost clicks, so I consider this the least of evils. Fortunately Angular
   // encapsulates this ugly logic away from the user.
   //

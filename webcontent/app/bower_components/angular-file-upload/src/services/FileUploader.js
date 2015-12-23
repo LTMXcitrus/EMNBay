@@ -49,7 +49,7 @@ export default (fileUploaderOptions, $rootScope, $http, $window, FileLikeObject,
             this.filters.unshift({name: 'folder', fn: this._folderFilter});
         }
         /**
-         * Adds items to the queue
+         * Adds item to the queue
          * @param {File|HTMLInputElement|Object|FileList|Array<Object>} files
          * @param {Object} [options]
          * @param {Array<Function>|String} filters
@@ -83,7 +83,7 @@ export default (fileUploaderOptions, $rootScope, $http, $window, FileLikeObject,
             if (this.autoUpload) this.uploadAll();
         }
         /**
-         * Remove items from the queue. Remove last: index = -1
+         * Remove item from the queue. Remove last: index = -1
          * @param {FileItem|Number} value
          */
         removeFromQueue(value) {
@@ -129,7 +129,7 @@ export default (fileUploaderOptions, $rootScope, $http, $window, FileLikeObject,
             if(item && item.isUploading) item[prop].abort();
         }
         /**
-         * Uploads all not uploaded items of queue
+         * Uploads all not uploaded item of queue
          */
         uploadAll() {
             var items = this.getNotUploadedItems().filter(item => !item.isUploading);
@@ -180,14 +180,14 @@ export default (fileUploaderOptions, $rootScope, $http, $window, FileLikeObject,
             return isNumber(value) ? value : this.queue.indexOf(value);
         }
         /**
-         * Returns not uploaded items
+         * Returns not uploaded item
          * @returns {Array}
          */
         getNotUploadedItems() {
             return this.queue.filter(item => !item.isUploaded);
         }
         /**
-         * Returns items ready for upload
+         * Returns item ready for upload
          * @returns {Array}
          */
         getReadyItems() {

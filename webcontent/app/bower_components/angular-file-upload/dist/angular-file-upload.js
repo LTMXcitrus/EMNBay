@@ -183,7 +183,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _createClass(FileUploader, {
 	            addToQueue: {
 	                /**
-	                 * Adds items to the queue
+	                 * Adds item to the queue
 	                 * @param {File|HTMLInputElement|Object|FileList|Array<Object>} files
 	                 * @param {Object} [options]
 	                 * @param {Array<Function>|String} filters
@@ -222,7 +222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            },
 	            removeFromQueue: {
 	                /**
-	                 * Remove items from the queue. Remove last: index = -1
+	                 * Remove item from the queue. Remove last: index = -1
 	                 * @param {FileItem|Number} value
 	                 */
 	
@@ -280,7 +280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            },
 	            uploadAll: {
 	                /**
-	                 * Uploads all not uploaded items of queue
+	                 * Uploads all not uploaded item of queue
 	                 */
 	
 	                value: function uploadAll() {
@@ -355,7 +355,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            },
 	            getNotUploadedItems: {
 	                /**
-	                 * Returns not uploaded items
+	                 * Returns not uploaded item
 	                 * @returns {Array}
 	                 */
 	
@@ -367,7 +367,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            },
 	            getReadyItems: {
 	                /**
-	                 * Returns items ready for upload
+	                 * Returns item ready for upload
 	                 * @returns {Array}
 	                 */
 	

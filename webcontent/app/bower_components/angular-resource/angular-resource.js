@@ -598,7 +598,7 @@ angular.module('ngResource', ['ng']).
                       value.push(new Resource(item));
                     } else {
                       // Valid JSON values may be string literals, and these should not be converted
-                      // into objects. These items will not have access to the Resource prototype
+                      // into objects. These item will not have access to the Resource prototype
                       // methods, but unfortunately there
                       value.push(item);
                     }

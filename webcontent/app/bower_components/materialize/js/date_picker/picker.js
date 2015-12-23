@@ -397,7 +397,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                         thingObject[ thing ] = value
                     }
 
-                    // Go through the things of items to set.
+                    // Go through the things of item to set.
                     for ( thingItem in thingObject ) {
 
                         // Grab the value of the thing.

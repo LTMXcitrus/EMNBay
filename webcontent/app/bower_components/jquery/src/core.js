@@ -388,7 +388,7 @@ jQuery.extend({
 			length = elems.length,
 			callbackExpect = !invert;
 
-		// Go through the array, only saving the items
+		// Go through the array, only saving the item
 		// that pass the validator function
 		for ( ; i < length; i++ ) {
 			callbackInverse = !callback( elems[ i ], i );
@@ -408,7 +408,7 @@ jQuery.extend({
 			isArray = isArraylike( elems ),
 			ret = [];
 
-		// Go through the array, translating each of the items to their new values
+		// Go through the array, translating each of the item to their new values
 		if ( isArray ) {
 			for ( ; i < length; i++ ) {
 				value = callback( elems[ i ], i, arg );

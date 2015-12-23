@@ -18,7 +18,7 @@ jQuery.extend({
 	// Is the DOM ready to be used? Set to true once it occurs.
 	isReady: false,
 
-	// A counter to track how many items to wait for before
+	// A counter to track how many item to wait for before
 	// the ready event fires. See #6781
 	readyWait: 1,
 

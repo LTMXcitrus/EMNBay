@@ -12,10 +12,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'hall/Hall.html'
         })
         .when('/items', {
-            templateUrl: 'items/items.html'
+            templateUrl: 'item/item.html'
         })
         .when('/item/:id',{
-            templateUrl: 'items/item.html',
+            templateUrl: 'item/item.html',
             controller: 'itemCtrl'
         })
         .when('/login',{
@@ -31,7 +31,7 @@ app.config(function ($routeProvider) {
             controller: 'createAccountCtrl'
         })
         .when('/myItemsForSale',{
-            templateUrl: 'items/itemsForSale.html',
+            templateUrl: 'item/itemsForSale.html',
             controller: 'itemsForSale'
         })
         .otherwise({
