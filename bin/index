@@ -10,8 +10,8 @@ var bodyParser = require('body-parser')
 var router = require('../router/Router');
 var session = require('express-session');
 
-var privatekey = fs.readFileSync('sslcert/privatekey.pem', 'utf8');
-var certificate = fs.readFileSync('sslcert/certificate.pem', 'utf8');
+var privatekey = fs.readFileSync('../sslcert/privatekey.pem', 'utf8');
+var certificate = fs.readFileSync('../sslcert/certificate.pem', 'utf8');
 
 var credentials = {
     key : privatekey,
