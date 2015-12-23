@@ -10,6 +10,9 @@ var bodyParser = require('body-parser')
 var router = require('../router/Router');
 var session = require('express-session');
 
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+
 var privatekey = fs.readFileSync('../sslcert/privatekey.pem', 'utf8');
 var certificate = fs.readFileSync('../sslcert/certificate.pem', 'utf8');
 
@@ -37,6 +40,6 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     //var server = https.Server(credentials,app).listen(8443);
-    var server = http.Server(app).listen(8080);
+    var server = http.Server(app).listen(server_port);
     console.log('connected!');
 });
