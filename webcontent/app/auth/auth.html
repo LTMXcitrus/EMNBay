@@ -1,0 +1,15 @@
+<div ng-controller="AuthCtrl">
+    <div class="container">
+        <div class="row">
+            <div input-field>
+                <input ng-model="user.username" type="text" length="150">
+                <label>nom d'utilisateur</label>
+            </div>
+            <div input-field>
+                <input ng-model="user.password" type="password">
+                <label>Mot de passe</label>
+            </div>
+            <a class="waves-effect waves-green btn-flat" ng-click="submitLogin(user)">Se connecter</a>
+        </div>
+    </div>
+</div>

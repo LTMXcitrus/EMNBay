@@ -1,0 +1,33 @@
+{
+  "name": "appliServeur",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/index"
+  },
+  "dependencies": {
+    "basic-auth": "^1.0.3",
+    "body-parser": "^1.14.1",
+    "connect-multiparty": "^2.0.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
+    "express-domain-middleware": "^0.1.0",
+    "express-session": "^1.12.1",
+    "express-xml-bodyparser": "^0.2.2",
+    "joi": "^7.0.0",
+    "mongoose": "^4.2.7",
+    "mongoose-relationship": "^0.1.4",
+    "passport": "^0.3.2",
+    "password-hash": "^1.2.2"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4",
+    "proxyquire": "^1.7.3",
+    "scripts": {
+      "test:default": "node_modules/mocha/bin/_mocha --report lcovonly --reporter spec test --check-leaks test"
+    },
+    "should": "^7.1.1",
+    "supertest": "^1.1.0"
+  }
+}

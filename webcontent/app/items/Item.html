@@ -1,0 +1,22 @@
+<div class="container" ng-controller="itemCtrl">
+    <div class="row" style="padding-top:10px;">
+        <div class="col s12 m6">
+            <img materialboxed data-caption="{{item.name}}" class="materialboxed responsive-img" ng-src="{{item.photo}}"/>
+        </div>
+        <div class="col s12 m6">
+            <h1>{{item.name}}</h1>
+            {{item.description}}
+        </div>
+    </div>
+
+
+    <div class="fixed-action-btn horizontal" style="top: 100px; right: 300px;">
+        <a class="btn-floating btn-large red">
+            <i class="large material-icons">menu</i>
+        </a>
+        <ul>
+            <li><a class="btn-floating green"><i class="material-icons">comment</i></a></li>
+            <li><a class="btn-floating orange"><i class="material-icons">attach_money</i></a></li>
+        </ul>
+    </div>
+</div>
