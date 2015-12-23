@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "supervisor index"
+    "start": "node index.js"
   },
   "dependencies": {
     "basic-auth": "^1.0.3",
