@@ -2,9 +2,9 @@
   "name": "appliServeur",
   "version": "0.0.0",
   "private": true,
-  "main": "./bin/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "supervisor ./bin/index"
+    "start": "supervisor index"
   },
   "dependencies": {
     "basic-auth": "^1.0.3",
