@@ -4,7 +4,7 @@
 
 'use strict';
 
-var baseUrl = "http://localhost:8080";
+var baseUrl = "";
 
 app.
     controller('navCtrl', ['$scope', 'Auth', function ($scope, Auth) {

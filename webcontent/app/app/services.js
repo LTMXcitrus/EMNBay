@@ -3,7 +3,7 @@
  */
 
 
-var baseUrl = "http://localhost:8080";
+var baseUrl = "";
 
 
 app.service('Auth', ['$cookies', '$http', function ($cookies, $http) {
