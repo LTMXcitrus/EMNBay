@@ -36,10 +36,10 @@ app.
             $scope.item = item;
         });
     }])
-    .controller('itemUpForSale', ['$scope', '$routeParams', '$resource', '$rootScope', 'FileUploader','Auth',
-        function ($scope, $routeParams, $resource, $rootScope, FileUploader,Auth) {
+    .controller('itemUpForSale', ['$scope', '$routeParams', '$resource', '$rootScope', 'FileUploader', 'Auth',
+        function ($scope, $routeParams, $resource, $rootScope, FileUploader, Auth) {
             var uploader = new FileUploader();
-            uploader.url = '/uploads/itemPicture';
+            uploader.url = baseUrl + '/uploads/itemPicture';
             $scope.uploader = uploader;
             $scope.uploader.onSuccessItem = function () {
                 $rootScope.$broadcast('newItem');
@@ -113,8 +113,8 @@ app.
             }
         }])
     .controller('itemsForSale', ['$scope', '$resource', 'Auth',
-        function ($scope, $resource,Auth) {
-            var Items = $resource(baseUrl + "/myitems/"+Auth.getUser().id, {'query': {method: 'GET', isArray: true}});
+        function ($scope, $resource, Auth) {
+            var Items = $resource(baseUrl + "/myitems/" + Auth.getUser().id, {'query': {method: 'GET', isArray: true}});
             Items.query().$promise.then(function (items) {
                 $scope.items = items;
             });
