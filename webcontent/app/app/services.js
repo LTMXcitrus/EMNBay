@@ -3,7 +3,7 @@
  */
 
 
-var baseUrl = "";
+var baseUrl = "/ws";
 
 
 app.service('Auth', ['$cookies', '$http', function ($cookies, $http) {

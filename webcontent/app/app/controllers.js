@@ -4,7 +4,7 @@
 
 'use strict';
 
-var baseUrl = "";
+var baseUrl = "/ws";
 
 app.
     controller('navCtrl', ['$scope', 'Auth', function ($scope, Auth) {

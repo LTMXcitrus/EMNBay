@@ -31,7 +31,7 @@ app.use(session({
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(router);
-app.use(express.static('./webcontent/app'));
+app.use(express.static('./webcontent/app/'));
 app.use('/uploads',express.static('uploads'));
 
 var connection_string = 'localhost/test';
