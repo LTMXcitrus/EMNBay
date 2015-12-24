@@ -16,18 +16,24 @@ router.get('/', function (req, res, next) {
     res.sendfile('./webcontent/app/index.html');
 });
 
-router.get('/ws/items', function (req, res, next) {
+
+var baseUrl = "/ws";
+
+
+
+
+router.get(baseUrl+'/items', function (req, res, next) {
     item.find().lean().populate('comments').exec(function (err, items) {
         return res.end(JSON.stringify(items));
     });
 });
-router.get('/ws/myitems/:id', function (req, res, next) {
+router.get(baseUrl+'/myitems/:id', function (req, res, next) {
     item.find({user: req.params.id}).lean().populate('comments').exec(function (err, items) {
         return res.end(JSON.stringify(items));
     });
 })
 
-router.get('/ws/item/:id', function (req, res, next) {
+router.get(baseUrl+'/item/:id', function (req, res, next) {
     res.writeHead(200);
     item.findOne({_id: req.params.id}).populate({
         path: 'comments',
@@ -37,20 +43,20 @@ router.get('/ws/item/:id', function (req, res, next) {
     })
 });
 
-router.get('/ws/users', function (req, res, next) {
+router.get(baseUrl+'/users', function (req, res, next) {
     res.writeHead(200);
 
     user.find().lean().exec(function (err, users) {
         return res.end(JSON.stringify(users));
     })
 });
-router.get('/ws/user/:id', function (req, res, next) {
+router.get(baseUrl+'/user/:id', function (req, res, next) {
     res.writeHead(200);
     user.findOne({_id: req.params.id}).lean().exec(function (err, user) {
         return res.end(JSON.stringify(user));
     })
 });
-router.post('/ws/item', function (req, res, next) {
+router.post(baseUrl+'/item', function (req, res, next) {
     var newItem = new item(req.body);
     newItem.save(function (err) {
         if (err) console.log(err);
@@ -59,14 +65,14 @@ router.post('/ws/item', function (req, res, next) {
 
 });
 
-router.get('/ws/disconnect', function (req, res, next) {
+router.get(baseUrl+'/disconnect', function (req, res, next) {
     req.session.regenerate(function (err) {
         if (err) console.log(err);
         res.send('you have been logged out');
     })
 });
 
-router.get('/ws/whoisit', function (req, res, next) {
+router.get(baseUrl+'/whoisit', function (req, res, next) {
     var session = req.session;
     if (session.user) {
         res.send(session.user);
@@ -75,7 +81,7 @@ router.get('/ws/whoisit', function (req, res, next) {
     }
 });
 
-router.post('/ws/whoisit', function (req, res, next) {
+router.post(baseUrl+'/whoisit', function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
     user.findOne({username: username}).lean().exec(function (err, user) {
@@ -96,7 +102,7 @@ router.post('/ws/whoisit', function (req, res, next) {
     });
 });
 
-router.post('/ws/createAccount', function (req, res, next) {
+router.post(baseUrl+'/createAccount', function (req, res, next) {
     var body = req.body;
     var password = passwordHash.generate(body.password);
     body.password = password;
@@ -112,7 +118,7 @@ router.post('/ws/createAccount', function (req, res, next) {
     })
 
 });
-router.post('/ws/uploads/itemPicture/:id', multipartMiddleware, function (req, res, next) {
+router.post(baseUrl+'/uploads/itemPicture/:id', multipartMiddleware, function (req, res, next) {
     var itemId = req.params.id;
     fs.readFile(req.files.file.path, function (err, data) {
         var newPath = "/uploads/" + (new Date().getTime()) + req.files.file.name;
@@ -125,9 +131,17 @@ router.post('/ws/uploads/itemPicture/:id', multipartMiddleware, function (req, r
     });
 });
 
-router.delete('/ws/contacts/:id', function (req, res, next) {
-
-});
+router.delete(baseUrl+'/deleteitem/:id',
+    function(req, res, next){
+            item.remove({_id:req.params.id}, function(err){
+                if(err){
+                    console.log(err)
+                }
+                else {
+                    res.send('Object deleted');
+                }
+            });
+})
 
 
 var setSession = function (req, user) {

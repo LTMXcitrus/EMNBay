@@ -112,8 +112,8 @@ app.
                 }
             }
         }])
-    .controller('itemsForSale', ['$scope', '$resource', 'Auth',
-        function ($scope, $resource, Auth) {
+    .controller('itemsForSale', ['$scope', '$resource', 'Auth', '$http','$rootScope',
+        function ($scope, $resource, Auth,$http,$rootScope) {
             var Items = $resource(baseUrl + "/myitems/" + Auth.getUser().id, {'query': {method: 'GET', isArray: true}});
             Items.query().$promise.then(function (items) {
                 $scope.items = items;
@@ -123,5 +123,15 @@ app.
                     $scope.items = items;
                 });
             });
+            $scope.deleteItem = function(item){
+                $http.delete(baseUrl + '/deleteitem/'+item._id)
+                    .success(function(){
+                        $rootScope.$broadcast('newItem');
+                        Materialize.toast('The object : \''+item.name+'\' has been deleted.',4000);
+                    })
+                    .error(function(data){
+                        if(data) Materialize.toast(data,4000);
+                    })
+            }
         }
     ])

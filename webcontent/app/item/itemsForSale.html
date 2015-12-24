@@ -11,6 +11,10 @@
                             class="material-icons right">more_vert</i></span>
 
                         <p><a href="/#/item/{{item._id}}">en savoir plus</a></p>
+                        <p>
+                            <a href="#/myItemsForSale" ng-click="deleteItem(item)"><i class="material-icons">delete</i></a>
+                            <a href="#/myItemsForSale" ><i class="material-icons">edit</i></a>
+                        </p>
                     </div>
                     <div class="card-reveal">
             <span class="card-title grey-text text-darken-4">{{item.name}}<i
