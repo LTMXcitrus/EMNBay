@@ -20,7 +20,7 @@ app.
         };
     }])
     .controller('itemsList', function ($scope, $resource) {
-        var Items = $resource(baseUrl + "/item", {'query': {method: 'GET', isArray: true}});
+        var Items = $resource(baseUrl + "/items", {'query': {method: 'GET', isArray: true}});
         Items.query().$promise.then(function (items) {
             $scope.items = items;
         });
