@@ -12,7 +12,7 @@ app.config(function ($routeProvider) {
             templateUrl: 'hall/Hall.html'
         })
         .when('/items', {
-            templateUrl: 'item/item.html'
+            templateUrl: 'item/items.html'
         })
         .when('/item/:id',{
             templateUrl: 'item/item.html',
