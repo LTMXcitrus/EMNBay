@@ -133,9 +133,9 @@ router.post(baseUrl+'/uploads/itemPicture/:id', multipartMiddleware, function (r
 
 router.delete(baseUrl+'/deleteitem/:id',
     function(req, res, next){
-        item.findOne({_id:req.params.id}).lean().populate('user').exec(function (err, item) {
+        item.findOne({_id:req.params.id}).lean().populate('user').exec(function (err, wantedItem) {
             console.log(req.session);
-            if (isAdmin(req) || item.user === getUser(req).id) { //check if user is admin or owner of the item.
+            if (isAdmin(req) || wantedItem.user === getUser(req).id) { //check if user is admin or owner of the item.
                 item.remove({_id: req.params.id}, function (err) {
                     if (err) {
                         console.log(err)
