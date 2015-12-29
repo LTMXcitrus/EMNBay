@@ -26,6 +26,10 @@ app.service('Auth', ['$cookies', '$http', function ($cookies, $http) {
                 .error(function (data) {
                     Materialize.toast(data, 4000);
                 });
+        },
+        isAdmin: function(){
+            var user = $cookies.getObject('user');
+            return user && user.username && user.username === 'mattcitron'; //quick workaround, of course it is also checked on server side.
         }
     };
 }]);

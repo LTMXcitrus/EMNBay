@@ -19,7 +19,7 @@ app.
             Auth.disconnect();
         };
     }])
-    .controller('itemsList', function ($scope, $resource) {
+    .controller('itemsList',['$scope', '$resource', 'Auth', '$http', function ($scope, $resource, Auth, $http) {
         var Items = $resource(baseUrl + "/items", {'query': {method: 'GET', isArray: true}});
         Items.query().$promise.then(function (items) {
             $scope.items = items;
@@ -29,7 +29,18 @@ app.
                 $scope.items = items;
             });
         });
-    })
+        $scope.deleteItem = function (item) {
+            $http.delete(baseUrl + '/deleteitem/' + item._id)
+                .success(function (data) {
+                    $rootScope.$broadcast('newItem');
+                    Materialize.toast(data, 4000);
+                })
+                .error(function (data) {
+                    if (data) Materialize.toast(data, 4000);
+                })
+        }
+        $scope.isAdmin = Auth.isAdmin();
+    }])
     .controller('itemCtrl', ['$scope', '$routeParams', '$resource', function ($scope, $routeParams, $resource) {
         var Item = $resource(baseUrl + "/item/" + $routeParams.id, {'query': {method: 'GET', isArray: false}});
         Item.get().$promise.then(function (item) {
@@ -108,12 +119,12 @@ app.
                         })
                 }
                 else {
-                    Materialize.toast('the given password are not identical');
+                    Materialize.toast('the given passwords are not identical');
                 }
             }
         }])
-    .controller('itemsForSale', ['$scope', '$resource', 'Auth', '$http','$rootScope',
-        function ($scope, $resource, Auth,$http,$rootScope) {
+    .controller('itemsForSale', ['$scope', '$resource', 'Auth', '$http', '$rootScope',
+        function ($scope, $resource, Auth, $http, $rootScope) {
             var Items = $resource(baseUrl + "/myitems/" + Auth.getUser().id, {'query': {method: 'GET', isArray: true}});
             Items.query().$promise.then(function (items) {
                 $scope.items = items;
@@ -123,14 +134,14 @@ app.
                     $scope.items = items;
                 });
             });
-            $scope.deleteItem = function(item){
-                $http.delete(baseUrl + '/deleteitem/'+item._id)
-                    .success(function(){
+            $scope.deleteItem = function (item) {
+                $http.delete(baseUrl + '/deleteitem/' + item._id)
+                    .success(function (data) {
                         $rootScope.$broadcast('newItem');
-                        Materialize.toast('The object : \''+item.name+'\' has been deleted.',4000);
+                        Materialize.toast(data, 4000);
                     })
-                    .error(function(data){
-                        if(data) Materialize.toast(data,4000);
+                    .error(function (data) {
+                        if (data) Materialize.toast(data, 4000);
                     })
             }
         }

@@ -133,15 +133,23 @@ router.post(baseUrl+'/uploads/itemPicture/:id', multipartMiddleware, function (r
 
 router.delete(baseUrl+'/deleteitem/:id',
     function(req, res, next){
-            item.remove({_id:req.params.id}, function(err){
-                if(err){
-                    console.log(err)
-                }
-                else {
-                    res.send('Object deleted');
-                }
-            });
-})
+        item.findOne({_id:req.params.id}).lean().populate('user').exec(function (err, item) {
+            console.log(req.session);
+            if (isAdmin(req) || item.user === getUser(req).id) { //check if user is admin or owner of the item.
+                item.remove({_id: req.params.id}, function (err) {
+                    if (err) {
+                        console.log(err)
+                    }
+                    else {
+                        res.send('Item deleted');
+                    }
+                });
+            }
+            else{
+                res.send('You do not have the right to delete this item.');
+            }
+        });
+});
 
 
 var setSession = function (req, user) {
@@ -152,6 +160,17 @@ var setSession = function (req, user) {
     userSession.email = user.email;
     userSession.id = user._id;
     req.session.user = userSession;
+    console.log('user stored into session.');
+    console.log(req.session.user);
+};
+
+var getUser = function(req){
+    return req.session.user;
+}
+
+var isAdmin = function(req){
+    var user = req.session.user;
+    return user && user.username && user.username === 'mattcitron';
 }
 
 // Make router available
