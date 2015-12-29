@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="06d1e554-04af-415a-9d4c-e1e8caa3a00f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/router/Router.js" afterPath="$PROJECT_DIR$/router/Router.js" />
-    </list>
+    <list default="true" id="06d1e554-04af-415a-9d4c-e1e8caa3a00f" name="Default" comment="" />
     <ignored path="appliServeur.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="uploads/" />

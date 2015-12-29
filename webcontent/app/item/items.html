@@ -1,7 +1,7 @@
 <div ng-controller="itemsList">
     <div class="container">
         <div class="row">
-            <div class="col s12 m3" ng-repeat="item in items">
+            <div class="col s12 m3" ng-repeat="item in items" ng-hide="items.length === 0">
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" ng-src="{{item.photo}}">
@@ -25,6 +25,9 @@
                         <p><a href="/#/item/{{item._id}}">en savoir plus</a></p>
                     </div>
                 </div>
+            </div>
+            <div ng-hide="items.length !== 0">
+                <p> No item available</p>
             </div>
         </div>
     </div>
