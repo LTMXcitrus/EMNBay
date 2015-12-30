@@ -18,22 +18,21 @@ router.get('/', function (req, res, next) {
 
 
 var baseUrl = "/ws";
+var uploadsUrl = process.env.OPENSHIFT_DATA_DIR ? process.env.OPENSHIFT_DATA_DIR + "/uploads" : "/uploads";
 
 
-
-
-router.get(baseUrl+'/items', function (req, res, next) {
+router.get(baseUrl + '/items', function (req, res, next) {
     item.find().lean().populate('comments').exec(function (err, items) {
         return res.end(JSON.stringify(items));
     });
 });
-router.get(baseUrl+'/myitems/:id', function (req, res, next) {
+router.get(baseUrl + '/myitems/:id', function (req, res, next) {
     item.find({user: req.params.id}).lean().populate('comments').exec(function (err, items) {
         return res.end(JSON.stringify(items));
     });
 })
 
-router.get(baseUrl+'/item/:id', function (req, res, next) {
+router.get(baseUrl + '/item/:id', function (req, res, next) {
     res.writeHead(200);
     item.findOne({_id: req.params.id}).populate({
         path: 'comments',
@@ -43,20 +42,20 @@ router.get(baseUrl+'/item/:id', function (req, res, next) {
     })
 });
 
-router.get(baseUrl+'/users', function (req, res, next) {
+router.get(baseUrl + '/users', function (req, res, next) {
     res.writeHead(200);
 
     user.find().lean().exec(function (err, users) {
         return res.end(JSON.stringify(users));
     })
 });
-router.get(baseUrl+'/user/:id', function (req, res, next) {
+router.get(baseUrl + '/user/:id', function (req, res, next) {
     res.writeHead(200);
     user.findOne({_id: req.params.id}).lean().exec(function (err, user) {
         return res.end(JSON.stringify(user));
     })
 });
-router.post(baseUrl+'/item', function (req, res, next) {
+router.post(baseUrl + '/item', function (req, res, next) {
     var newItem = new item(req.body);
     newItem.save(function (err) {
         if (err) console.log(err);
@@ -65,14 +64,14 @@ router.post(baseUrl+'/item', function (req, res, next) {
 
 });
 
-router.get(baseUrl+'/disconnect', function (req, res, next) {
+router.get(baseUrl + '/disconnect', function (req, res, next) {
     req.session.regenerate(function (err) {
         if (err) console.log(err);
         res.send('you have been logged out');
     })
 });
 
-router.get(baseUrl+'/whoisit', function (req, res, next) {
+router.get(baseUrl + '/whoisit', function (req, res, next) {
     var session = req.session;
     if (session.user) {
         res.send(session.user);
@@ -81,7 +80,7 @@ router.get(baseUrl+'/whoisit', function (req, res, next) {
     }
 });
 
-router.post(baseUrl+'/whoisit', function (req, res, next) {
+router.post(baseUrl + '/whoisit', function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
     user.findOne({username: username}).lean().exec(function (err, user) {
@@ -102,7 +101,7 @@ router.post(baseUrl+'/whoisit', function (req, res, next) {
     });
 });
 
-router.post(baseUrl+'/createAccount', function (req, res, next) {
+router.post(baseUrl + '/createAccount', function (req, res, next) {
     var body = req.body;
     var password = passwordHash.generate(body.password);
     body.password = password;
@@ -118,10 +117,10 @@ router.post(baseUrl+'/createAccount', function (req, res, next) {
     })
 
 });
-router.post(baseUrl+'/uploads/itemPicture/:id', multipartMiddleware, function (req, res, next) {
+router.post(baseUrl + '/uploads/itemPicture/:id', multipartMiddleware, function (req, res, next) {
     var itemId = req.params.id;
     fs.readFile(req.files.file.path, function (err, data) {
-        var newPath = "/uploads/" + (new Date().getTime()) + req.files.file.name;
+        var newPath = uploadsUrl + (new Date().getTime()) + req.files.file.name;
         fs.writeFile("." + newPath, data, function (err) {
             item.update({_id: itemId}, {photo: newPath}, function (err) {
                 if (err) console.log(err);
@@ -131,9 +130,9 @@ router.post(baseUrl+'/uploads/itemPicture/:id', multipartMiddleware, function (r
     });
 });
 
-router.delete(baseUrl+'/deleteitem/:id',
-    function(req, res, next){
-        item.findOne({_id:req.params.id}).lean().populate('user').exec(function (err, wantedItem) {
+router.delete(baseUrl + '/deleteitem/:id',
+    function (req, res, next) {
+        item.findOne({_id: req.params.id}).lean().populate('user').exec(function (err, wantedItem) {
             console.log(req.session);
             if (isAdmin(req) || wantedItem.user === getUser(req).id) { //check if user is admin or owner of the item.
                 item.remove({_id: req.params.id}, function (err) {
@@ -145,11 +144,11 @@ router.delete(baseUrl+'/deleteitem/:id',
                     }
                 });
             }
-            else{
+            else {
                 res.send('You do not have the right to delete this item.');
             }
         });
-});
+    });
 
 
 var setSession = function (req, user) {
@@ -164,11 +163,11 @@ var setSession = function (req, user) {
     console.log(req.session.user);
 };
 
-var getUser = function(req){
+var getUser = function (req) {
     return req.session.user;
 }
 
-var isAdmin = function(req){
+var isAdmin = function (req) {
     var user = req.session.user;
     return user && user.username && user.username === 'mattcitron';
 }
