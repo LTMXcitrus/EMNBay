@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 app.use(router);
 app.use(express.static('./webcontent/app/'));
 if(process.env.OPENSHIFT_DATA_DIR){
-    app.use('uploads', express.static(process.env.OPENSHIFT_DATA_DIR+'/uploads'));
+    app.use('/uploads', express.static(process.env.OPENSHIFT_DATA_DIR+'/uploads'));
 }else{
     app.use('/uploads',express.static('uploads'));
 }
