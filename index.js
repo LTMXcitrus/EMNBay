@@ -32,7 +32,13 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(router);
 app.use(express.static('./webcontent/app/'));
-app.use('/uploads',express.static('uploads'));
+if(process.env.OPENSHIFT_DATA_DIR){
+    app.use('uploads', express.static(process.env.OPENSHIFT_DATA_DIR+'/uploads'));
+}else{
+    app.use('/uploads',express.static('uploads'));
+}
+
+
 
 var connection_string = 'localhost/test';
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
