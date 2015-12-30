@@ -18,7 +18,7 @@ router.get('/', function (req, res, next) {
 
 
 var baseUrl = "/ws";
-var uploadsUrl = process.env.OPENSHIFT_DATA_DIR ? process.env.OPENSHIFT_DATA_DIR + "/uploads" : "/uploads";
+var uploadsUrl = process.env.OPENSHIFT_DATA_DIR ? process.env.OPENSHIFT_DATA_DIR + "uploads" : "/uploads";
 
 
 router.get(baseUrl + '/items', function (req, res, next) {
@@ -120,7 +120,7 @@ router.post(baseUrl + '/createAccount', function (req, res, next) {
 router.post(baseUrl + '/uploads/itemPicture/:id', multipartMiddleware, function (req, res, next) {
     var itemId = req.params.id;
     fs.readFile(req.files.file.path, function (err, data) {
-        var newPath = uploadsUrl + (new Date().getTime()) + req.files.file.name;
+        var newPath = uploadsUrl + '/' + (new Date().getTime()) + req.files.file.name;
         fs.writeFile("." + newPath, data, function (err) {
             item.update({_id: itemId}, {photo: newPath}, function (err) {
                 if (err) console.log(err);
