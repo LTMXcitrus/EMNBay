@@ -21,11 +21,12 @@
 
 <nav class="blue">
     <div class="nav-wrapper" ng-controller="navCtrl">
-        <a class="brand-logo center" href="#">EMNbay</a>
+        <a class="brand-logo center" href="#/">EMNbay</a>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
             <li><a href="#/">Home</a></li>
-            <li><a href="#creationModal" modal ng-hide="!isConnected()">Sell</a></li>
+            <li><a href="#creationModal" modal ng-show="isConnected()">Sell</a></li>
             <li><a href="#/items">Items</a></li>
+            <li><a href="#/users" ng-show="isConnected()">Users</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
 

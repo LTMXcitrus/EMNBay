@@ -34,6 +34,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'item/itemsForSale.html',
             controller: 'itemsForSale'
         })
+        .when('/users',{
+            templateUrl: 'user/users.html',
+            controller: 'usersCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });

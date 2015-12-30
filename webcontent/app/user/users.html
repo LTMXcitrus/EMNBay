@@ -1,0 +1,57 @@
+<!--<div class="container">-->
+<ul class="collapsible popout" data-collapsible="accordion" watch>
+    <li ng-repeat="single in users">
+        <div class="collapsible-header" ng-click="loadContent(single._id)">
+            <div class="row">
+                {{single.username}} -
+                {{single.firstname}}
+                {{single.lastname}}
+                <div class="chip" ng-show="single.phone">
+                    {{single.phone}}
+                </div>
+                <div class="chip" ng-show="single.email">
+                    {{single.email}}
+                </div>
+            </div>
+        </div>
+        <div class="collapsible-body">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col s12 m3" ng-repeat="item in user.items" ng-hide="items.length === 0">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" ng-src="{{item.photo}}">
+                            </div>
+                            <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">{{item.name}}<i
+                            class="material-icons right">more_vert</i></span>
+
+                                <p><a href="/#/item/{{item._id}}">en savoir plus</a></p>
+
+                                <p ng-hide="!isAdmin">
+                                    <a href="#/items" ng-click="deleteItem(item)"><i
+                                            class="material-icons">delete</i></a>
+                                    <a href="#/items"><i class="material-icons">edit</i></a>
+                                </p>
+                            </div>
+                            <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">{{item.name}}<i
+                    class="material-icons right">close</i></span>
+
+                                <p>{{item.description}}</p>
+
+                                <p><a href="/#/item/{{item._id}}">en savoir plus</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span ng-hide="!isAdmin">
+                    <a href="#/users" ng-click="deleteUser(user._id)"><i class="material-icons">delete</i></a>
+                    <a href="#/users"><i class="material-icons">edit</i></a>
+                </span>
+            </div>
+        </div>
+    </li>
+</ul>
+<!--</div>-->

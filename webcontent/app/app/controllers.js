@@ -105,7 +105,7 @@ app.
 
             $scope.createAccount = function (user) {
 
-                if ($scope.password === $scope.password2) {
+                if (user.password === user.password2) {
                     delete user.password2;
                     $http.post(baseUrl + '/createAccount', user)
                         .success(function (user) {
@@ -120,7 +120,7 @@ app.
                         })
                 }
                 else {
-                    Materialize.toast('the given passwords are not identical');
+                    Materialize.toast('the given passwords are not identical',4000);
                 }
             }
         }])
@@ -147,3 +147,18 @@ app.
             }
         }
     ])
+    .controller('usersCtrl',['$scope', 'Auth', '$resource',
+        function($scope,Auth,$resource){
+            var Users = $resource(baseUrl + "/users", {'query': {method: 'GET', isArray: true}});
+            Users.query().$promise.then(function(users){
+                $scope.users = users;
+            });
+            $scope.loadContent = function(id){
+                $scope.user = {};
+                var User = $resource(baseUrl + '/user/'+id)
+                User.get().$promise.then(function(user){
+                    $scope.user = user;
+                })
+            };
+            $scope.isAdmin = Auth.isAdmin();
+    }]);

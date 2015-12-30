@@ -18,7 +18,6 @@ router.get('/', function (req, res, next) {
 
 
 var baseUrl = "/ws";
-//var uploadsUrl = process.env.OPENSHIFT_DATA_DIR ? process.env.OPENSHIFT_DATA_DIR + "uploads" : "/uploads";
 var uploadsUrl = "/uploads";
 
 router.get(baseUrl + '/items', function (req, res, next) {
@@ -39,20 +38,6 @@ router.get(baseUrl + '/item/:id', function (req, res, next) {
         select: 'content user'
     }).lean().exec(function (err, item) {
         return res.end(JSON.stringify(item));
-    })
-});
-
-router.get(baseUrl + '/users', function (req, res, next) {
-    res.writeHead(200);
-
-    user.find().lean().exec(function (err, users) {
-        return res.end(JSON.stringify(users));
-    })
-});
-router.get(baseUrl + '/user/:id', function (req, res, next) {
-    res.writeHead(200);
-    user.findOne({_id: req.params.id}).lean().exec(function (err, user) {
-        return res.end(JSON.stringify(user));
     })
 });
 router.post(baseUrl + '/item', function (req, res, next) {
@@ -133,7 +118,6 @@ router.post(baseUrl + '/uploads/itemPicture/:id', multipartMiddleware, function 
 router.delete(baseUrl + '/deleteitem/:id',
     function (req, res, next) {
         item.findOne({_id: req.params.id}).lean().populate('user').exec(function (err, wantedItem) {
-            console.log(req.session);
             if (isAdmin(req) || wantedItem.user === getUser(req).id) { //check if user is admin or owner of the item.
                 item.remove({_id: req.params.id}, function (err) {
                     if (err) {
@@ -147,6 +131,22 @@ router.delete(baseUrl + '/deleteitem/:id',
             else {
                 res.send('You do not have the right to delete this item.');
             }
+        });
+    });
+
+router.get(baseUrl + '/users',
+    function (req, res, next) {
+        user.find({}, {password: 0, items: 0, comments: 0, __v: 0}).lean().exec(function (err, users) {
+            return res.end(JSON.stringify(users));
+        });
+    });
+router.get(baseUrl + '/user/:id',
+    function (req, res, next) {
+        user.findOne({_id:req.params.id},{password:0}).populate('items').lean().exec(function(err,wantedUser){
+            item.find({user:req.params.id}).lean().exec(function(err, items){
+                wantedUser.items = items;
+                return res.end(JSON.stringify(wantedUser));
+            });
         });
     });
 
