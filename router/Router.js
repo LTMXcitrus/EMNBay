@@ -18,8 +18,8 @@ router.get('/', function (req, res, next) {
 
 
 var baseUrl = "/ws";
-var uploadsUrl = process.env.OPENSHIFT_DATA_DIR ? process.env.OPENSHIFT_DATA_DIR + "uploads" : "/uploads";
-
+//var uploadsUrl = process.env.OPENSHIFT_DATA_DIR ? process.env.OPENSHIFT_DATA_DIR + "uploads" : "/uploads";
+var uploadsUrl = "/uploads";
 
 router.get(baseUrl + '/items', function (req, res, next) {
     item.find().lean().populate('comments').exec(function (err, items) {
